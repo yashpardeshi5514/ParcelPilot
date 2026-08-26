@@ -1,61 +1,244 @@
-# 📦 ParcelPilot Support AI
+📦 ParcelPilot Support AI
 
-> An intelligent, account-aware customer support assistant for shipment operations, policy lookup, document search, and controlled support escalation.
+ParcelPilot is an intelligent customer support assistant for shipment tracking, account information, document search, policy lookup, and support escalation.
 
----
+🔗 Repository
 
-## 📌 Overview
+GitHub Repository:
+https://github.com/yashpardeshi5514/ParcelPilot
 
-**ParcelPilot Support AI** is a customer support assistant designed to help users quickly resolve shipment and account-related queries through a conversational interface.
+🛠️ Tech Stack
 
-The application combines:
+Python
 
-- Customer account context
-- Shipment and order lookup
-- Internal ParcelPilot document search
-- Customer-specific policy handling
-- Support escalation workflows
-- Confirmation before state-changing actions
-- A modern Streamlit-based user interface
+Streamlit
 
-The project is designed as a practical support-assistant prototype where structured data, internal documentation, and controlled actions work together in a single application.
+ChromaDB
 
----
+PDF document retrieval
 
-# ✨ Features
+JSON-based escalation storage
 
-## 👤 1. Account-Aware Support
+⚙️ Setup Instructions
 
-The system maintains the currently selected customer account and uses that context when answering support questions.
+1. Clone the repository
 
-### Supported Accounts
+git clone https://github.com/yashpardeshi5514/ParcelPilot
+cd ParcelPilot
 
-| Account | Account ID | Plan | Status |
-|---|---|---|---|
-| Northstar Logistics | `ACCT-001` | Enterprise | Active |
-| LumenWorks | `ACCT-002` | Growth | Active |
+2. Create a virtual environment
 
-### Example
+Windows PowerShell:
 
-**User:**
+python -m venv venv
 
-```text
+3. Activate the virtual environment
+
+.\venv\Scripts\Activate.ps1
+
+4. Install dependencies
+
+pip install -r requirements.txt
+
+▶️ Run the Application
+
+Start the Streamlit application:
+
+streamlit run app.py
+
+The application will open at:
+
+http://localhost:8501
+
+🧪 Example Queries
+
+Try these queries after starting the application:
+
 What is my account?
 
-Assistant:
-You are using the Northstar Logistics account (ACCT-001).
-Your plan is Enterprise and the account is active.
-
-2. Shipment / Order Lookup
-Users can ask about shipment information using an order ID.
-
-Example
-
-User:
 What is the status of ORD-1001?
-Assistant:
-ORD-1001 is currently BOOKED.
 
+What is the status of ORD-9999?
+
+Can Northstar cancel ORD-1001 without a cancellation fee?
+
+What is the cancellation policy for Northstar?
+
+What is the support policy?
+
+What are the known shipment issues?
+
+What is the process for raising a shipment exception?
+
+Please escalate this issue to support
+
+🚨 Escalation Workflow
+
+The application requires confirmation before creating a support escalation.
+
+User requests escalation
+        ↓
+Prepare escalation
+        ↓
+Display escalation details
+        ↓
+User confirmation
+        ↓
+Create escalation
+        ↓
+Generate Escalation ID
+
+Example:
+
+Escalation ID: ESC-0004
+Priority: P2
+Status: OPEN
+
+📚 Knowledge Base
+
+The application uses the following ParcelPilot documents:
+
+Document
+
+Purpose
+
+01_Support_Policy_v3_CURRENT.pdf
+
+Current support policy
+
+02_Support_Policy_v2_DEPRECATED.pdf
+
+Deprecated support policy
+
+03_Cancellation_and_Service_Credit_SOP_v4.pdf
+
+Cancellation and service-credit procedures
+
+04_Product_Operations_Guide_and_Known_Issues.pdf
+
+Product operations and known issues
+
+05_Northstar_Logistics_Enterprise_Agreement.pdf
+
+Northstar-specific agreement
+
+06_LumenWorks_Service_Agreement.pdf
+
+LumenWorks-specific agreement
+
+👥 Supported Accounts
+
+Northstar Logistics
+
+Account ID: ACCT-001
+Plan: Enterprise
+Status: Active
+
+LumenWorks
+
+Account ID: ACCT-002
+Plan: Growth
+Status: Active
+
+📦 Example Shipment
+
+Order ID: ORD-1001
+Status: BOOKED
 Carrier: SwiftShip
+Shipment Fee: ₹4,200
 
-Shipment fee: ₹4,200
+📁 Project Structure
+
+ParcelPilot/
+│
+├── agent/
+│   ├── agent.py
+│   ├── demo_agent.py
+│   └── tools.py
+│
+├── data/
+│   ├── 01_Support_Policy_v3_CURRENT.pdf
+│   ├── 02_Support_Policy_v2_DEPRECATED.pdf
+│   ├── 03_Cancellation_and_Service_Credit_SOP_v4.pdf
+│   ├── 04_Product_Operations_Guide_and_Known_Issues.pdf
+│   ├── 05_Northstar_Logistics_Enterprise_Agreement.pdf
+│   ├── 06_LumenWorks_Service_Agreement.pdf
+│   └── escalations.json
+│
+├── retrieval/
+│   ├── ingest.py
+│   └── vector_store.py
+│
+├── tools/
+│   ├── actions.py
+│   ├── data_lookup.py
+│   └── document_search.py
+│
+├── app.py
+├── requirements.txt
+├── README.md
+└── .gitignore
+
+🔐 Environment Variables
+
+If environment variables are required, create a .env file in the project root.
+
+Example:
+
+OPENAI_API_KEY=your_api_key_here
+
+Do not commit API keys, passwords, or other secrets to GitHub.
+
+Make sure .env is included in .gitignore.
+
+🧪 Testing
+
+Account Test
+
+python -c "from agent.demo_agent import ask_demo_agent; print(ask_demo_agent('What is my account?'))"
+
+Order Test
+
+python -c "from agent.demo_agent import ask_demo_agent; print(ask_demo_agent('What is the status of ORD-1001?'))"
+
+Cancellation Test
+
+python -c "from agent.demo_agent import ask_demo_agent; print(ask_demo_agent('Can Northstar cancel ORD-1001 without a cancellation fee?'))"
+
+Escalation Test
+
+python -c "from agent.demo_agent import ask_demo_agent; print(ask_demo_agent('Please escalate this issue to support'))"
+
+📌 Current Capabilities
+
+Account lookup
+
+Customer account context
+
+Shipment/order lookup
+
+Unknown order handling
+
+Document search
+
+Support policy lookup
+
+Customer-specific agreement handling
+
+Cancellation policy checking
+
+Shipment issue lookup
+
+Support escalation
+
+Confirmation before state-changing actions
+
+Local escalation storage
+
+Streamlit conversational interface
+
+📊 Project Status
+
+Status: Working Prototype
+
+The core ParcelPilot support workflow is implemented and can be run locally using Streamlit.
