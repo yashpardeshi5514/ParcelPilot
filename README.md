@@ -7,6 +7,9 @@ ParcelPilot is an intelligent customer support assistant for shipment tracking, 
 GitHub Repository:
 https://github.com/yashpardeshi5514/ParcelPilot
 
+Demo Link:
+https://parcelpilotsupportai.streamlit.app/
+
 🛠️ Tech Stack
 
 Python
